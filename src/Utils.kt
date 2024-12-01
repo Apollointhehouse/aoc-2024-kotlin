@@ -1,21 +1,30 @@
-import java.math.BigInteger
-import java.security.MessageDigest
+import solutions.Solution
 import kotlin.io.path.Path
 import kotlin.io.path.readText
 
 /**
  * Reads lines from the given input txt file.
  */
-fun readInput(name: String) = Path("src/$name.txt").readText().trim().lines()
+fun readInput(name: String) = Path("src/data/$name.txt").readText().trim().lines()
 
-/**
- * Converts string to md5 hash.
- */
-fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
-    .toString(16)
-    .padStart(32, '0')
+fun List<Solution>.run(day: String) = filter { it.day == day }.forEach { solution ->
+    val input = readInput(day)
+    solution.run(input)
+}
 
-/**
- * The cleaner shorthand for printing output.
- */
-fun Any?.println() = println(this)
+fun List<Solution>.runAll() = forEach { solution ->
+    val day = solution.day
+    val input = readInput(day)
+    solution.run(input)
+}
+
+fun List<Solution>.test(day: String) = filter { it.day == day }.forEach { solution ->
+    val input = readInput("${day}_test")
+    solution.test(input)
+}
+
+fun List<Solution>.testAll() = forEach { solution ->
+    val day = solution.day
+    val input = readInput("${day}_test")
+    solution.test(input)
+}
