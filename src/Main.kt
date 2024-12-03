@@ -1,11 +1,11 @@
 import solutions.*
 
 fun main() {
-	val solutions = listOf<Solution>(
-		Day01
+	val solutions = listOf(
+		Day01,
+		Day02,
+		Day03
 	)
 
-//	solutions.testAll()
-	solutions.runAll()
+	solutions.run("Day03")
 }
-
